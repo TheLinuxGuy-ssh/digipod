@@ -1,11 +1,5 @@
-   /*
-Based on the https://www.shadertoy.com/view/MtVBzG
-*/
-
-/* Single font import instead of multiple */
 @import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap");
 
-/* Variables for easy customization */
 :root {
   --primary-font: "Boldonse", sans-serif;
   --secondary-font: "Bodoni Moda", serif;
