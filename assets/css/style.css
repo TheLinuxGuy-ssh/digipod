@@ -22,16 +22,16 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   cursor: none;
   background-color: #111;
   letter-spacing: -0.03em;
   position: relative;
+  overflow-x: hidden;
 }
 
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
@@ -83,7 +83,7 @@ body::before {
 }
 
 .content {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -151,7 +151,7 @@ body::before {
 
 canvas {
   display: block;
-  position: fixed !important;
+  position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
@@ -326,4 +326,87 @@ canvas {
 .quote-span {
     text-align: left !important; 
     width: 100%;
+}
+
+.showcase::before {
+    --size: 45px;
+    --line: color-mix(in hsl, canvasText, transparent 70%);
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        50% 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+        var(--size) var(--size);
+    mask: linear-gradient(-20deg, transparent 50%, white);
+    top: 0;
+    transform-style: flat;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .section-resource {
+  padding: 4em;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+  display: flex;
+  position: relative;
+}
+
+.osmo-icon__link {
+  color: currentColor;
+  text-decoration: none;
+  position: absolute;
+}
+
+.osmo-icon-svg {
+  width: 10em;
+}
+
+.dots-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dots-container {
+  grid-column-gap: 2em;
+  grid-row-gap: 2em;
+  pointer-events: none;
+  flex-flow: wrap;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 0em;
+}
+
+.dot {
+  will-change: transform, background-color;
+  transform-origin: center;
+  background-color: #6447d5;
+  border-radius: 50%;
+  width: 0.75em;
+  height: 0.75em;
+  position: relative;
+  transform: translate(0);
+}
+.section-resource {
+  margin-top: 0rem;
+  z-index: 99999999999999;
+}
+
+.showcase-screenshot {
+    display: flex;
+  justify-content: center;
+  align-items: center;
 }
