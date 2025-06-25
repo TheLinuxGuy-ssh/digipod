@@ -635,56 +635,22 @@ a-hole canvas {
   align-items: center;
   gap: 2rem;
 }
+.extras-section {
+  width: 100%;
+}
 
-.grid-container {
-  width: min(75rem, 100%);
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
-  gap: 2rem;
+.feature-row {
+  display: flex;
 }
-.extras-section .card {
-  --grad: red, blue;
-  padding: 2.5rem;
-  background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  border-radius: 2rem;
-  gap: 1.5rem;
-  display: grid;
-  grid-template: 'title icon' 'content content' 'bar bar' / 1fr auto;
-  font-family: system-ui, sans-serif;
-  color: #444447;
-  box-shadow: 
-    inset -2px 2px hsl(0 0 100% / 1),
-    -20px 20px 40px hsl(0 0 0 / .25) ;
+.feature-col {
+  display: block;
+  width: 100%;
 }
-.extras-section  .title {
-    font-size: 1.5rem;
-    grid-area: title;
-    align-self: end;
-    text-transform: uppercase;
-    font-weight: 500;
-    word-break: break-all;
+.feature-col.blocks {
     
-  }
- .extras-section .icon {
-    grid-area: icon;
-    font-size: 3rem;
-  }
-   
- .extras-section .icon > i {
-      color: transparent;
-      background: linear-gradient(to right, var(--grad));
-      background-clip: text;
-  }
-.extras-section  .content {
-    grid-area: content;
-  }
- .extras-section   .content > *:first-child { margin-top: 0rem}
- .extras-section   .content > *:last-child { margin-bottom: 0rem}
- .extras-section .content::after {
-    content: "";
-    grid-area: bar;
-    height: 2px;
-    background-image: linear-gradient(90deg, var(--grad));
-/*     margin-inline: -1.5rem; */
-  }
+}
+
+.feature-card {
+  background: #6447d5;
+  color: #fff;
+}
