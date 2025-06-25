@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap");
-
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+  
 :root {
   --primary-font: "Boldonse", sans-serif;
   --secondary-font: "Bodoni Moda", serif;
@@ -413,6 +414,9 @@ canvas {
   align-items: center;
   width: 100%;
   height: 100%;
+  position: absolute;
+  bottom: -87.5%;
+  z-index: 10000000000000000;
 }
 
 a-hole {
@@ -500,6 +504,90 @@ a-hole canvas {
   height: 100%;
 }
 
+.features .card {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  background-color: rgba(48, 48, 48, 0.205);
+  padding: 2.5rem 2rem;
+  margin: 2rem;
+    border: 1px solid #444444;
+    font-family: Boldonse;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    font-weight: 100;
+}
+
+.features .header {
+  display: flex;
+  flex-direction: column;
+}
+
+.features .title {
+  font-size: 0.75rem;
+  line-height: 2rem;
+  font-weight: 200;
+  color: #fff
+}
+
+.features .price {
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 200;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.features .desc {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.625;
+  color: rgba(156, 163, 175, 1);
+}
+
+.features .lists {
+  margin-bottom: 1.5rem;
+  flex: 1 1 0%;
+  color: rgba(156, 163, 175, 1);
+}
+
+.features .lists .list {
+  margin-bottom: 0.5rem;
+  display: flex;
+  margin-left: 0.5rem
+}
+
+.features .lists .list svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  color: rgba(167, 139, 250, 1);
+}
+
+.features .action {
+  border: none;
+  outline: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+  background-color: rgba(167, 139, 250, 1);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(17, 24, 39, 1);
+}
+
 @media only screen and (max-width: 1024px) {
   .navbar {
     width: 90%;
@@ -513,6 +601,12 @@ a-hole canvas {
   .caption, .author{
     font-size: 2.5vw;
   }
+  /* .showcase-screenshot {
+    margin-top: -10vw !important;
+  } */
+   .showcase-screenshot {
+    bottom: -55% !important;
+   }
 }
 
 @media only screen and (max-width: 768px) {
@@ -534,3 +628,63 @@ a-hole canvas {
     width: 20rem;
   }
 }
+
+.features {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.grid-container {
+  width: min(75rem, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 2rem;
+}
+.extras-section .card {
+  --grad: red, blue;
+  padding: 2.5rem;
+  background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  border-radius: 2rem;
+  gap: 1.5rem;
+  display: grid;
+  grid-template: 'title icon' 'content content' 'bar bar' / 1fr auto;
+  font-family: system-ui, sans-serif;
+  color: #444447;
+  box-shadow: 
+    inset -2px 2px hsl(0 0 100% / 1),
+    -20px 20px 40px hsl(0 0 0 / .25) ;
+}
+.extras-section  .title {
+    font-size: 1.5rem;
+    grid-area: title;
+    align-self: end;
+    text-transform: uppercase;
+    font-weight: 500;
+    word-break: break-all;
+    
+  }
+ .extras-section .icon {
+    grid-area: icon;
+    font-size: 3rem;
+  }
+   
+ .extras-section .icon > i {
+      color: transparent;
+      background: linear-gradient(to right, var(--grad));
+      background-clip: text;
+  }
+.extras-section  .content {
+    grid-area: content;
+  }
+ .extras-section   .content > *:first-child { margin-top: 0rem}
+ .extras-section   .content > *:last-child { margin-bottom: 0rem}
+ .extras-section .content::after {
+    content: "";
+    grid-area: bar;
+    height: 2px;
+    background-image: linear-gradient(90deg, var(--grad));
+/*     margin-inline: -1.5rem; */
+  }
