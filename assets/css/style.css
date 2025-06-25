@@ -313,6 +313,7 @@ canvas {
   margin: 0.1rem auto;
   margin-right: 0.1rem;
 }
+
 .content .btn {
   width: 25rem;
   height: 3.5em;
@@ -412,4 +413,124 @@ canvas {
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+a-hole {
+  position: absolute;
+  top: 4em;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+a-hole:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: block;
+  width: 150%;
+  height: 140%;
+  background: radial-gradient(ellipse at 50% 55%, transparent 10%, black 50%);
+  transform: translate3d(-50%, -50%, 0);
+  content: "";
+}
+a-hole:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 75%, #a900ff 20%, transparent 75%);
+  mix-blend-mode: overlay;
+  transform: translate3d(-50%, -50%, 0);
+  content: "";
+}
+@-webkit-keyframes aura-glow {
+  0% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 0 300%;
+  }
+}
+@keyframes aura-glow {
+  0% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 0 300%;
+  }
+}
+a-hole .aura {
+  position: absolute;
+  top: -71.5%;
+  left: 50%;
+  z-index: 3;
+  width: 30%;
+  height: 140%;
+  background: linear-gradient(20deg, #00f8f1, #ffbd1e20 16.5%, #fe848f 33%, #fe848f20 49.5%, #00f8f1 66%, #00f8f160 85.5%, #ffbd1e 100%) 0 100%/100% 200%;
+  border-radius: 0 0 100% 100%;
+  filter: blur(50px);
+  mix-blend-mode: plus-lighter;
+  opacity: 0.75;
+  transform: translate3d(-50%, 0, 0);
+  -webkit-animation: aura-glow 5s infinite linear;
+          animation: aura-glow 5s infinite linear;
+}
+a-hole .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(transparent, transparent 1px, white 1px, white 2px);
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+  background-color: #1a1a1a;
+}
+a-hole canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .navbar {
+    width: 90%;
+  }
+  .navbar img {
+    transform: scale(0.8);
+  }
+  .quote {
+    font-size: 7vw;
+  }
+  .caption, .author{
+    font-size: 2.5vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .quote-container {
+    margin-top: 5rem;
+  }
+  .quote {
+    font-size: 10vw;
+  }
+  .caption{
+    font-size: 5vw;
+    margin-bottom: 7.5vw;
+  }
+  .author {
+    font-size: 5.8vw;
+    
+  }
+  .content .btn {
+    width: 20rem;
+  }
 }
