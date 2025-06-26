@@ -151,6 +151,10 @@ body::before {
   will-change: transform;
 }
 
+.dg {
+  display: none;
+}
+
 canvas {
   display: block;
   position: absolute !important;
@@ -278,10 +282,10 @@ canvas {
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 100000;
+  z-index: 10000000000000000000000000;
   color: #fff;
   background-color: #00000025;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(8px);
   width: 50%;
   height:4rem;
   border-radius: 1.2rem;
@@ -357,8 +361,10 @@ canvas {
   padding: 4em;
   justify-content: center;
   align-items: center;
-  height: 100svh;
+  height: 100vh;
+  z-index: -1;
   display: flex;
+  overflow: hidden;
   position: relative;
 }
 
@@ -372,40 +378,9 @@ canvas {
   width: 10em;
 }
 
-.dots-wrap {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.dots-container {
-  grid-column-gap: 2em;
-  grid-row-gap: 2em;
-  pointer-events: none;
-  flex-flow: wrap;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr;
-  grid-auto-columns: 1fr;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: absolute;
-  inset: 0em;
-}
-
-.dot {
-  will-change: transform, background-color;
-  transform-origin: center;
-  background-color: #6447d5;
-  border-radius: 50%;
-  width: 0.75em;
-  height: 0.75em;
-  position: relative;
-  transform: translate(0);
-}
 .section-resource {
   margin-top: 0rem;
-  z-index: 99999999999999;
+  z-index: 99;
 }
 
 .showcase-screenshot {
@@ -417,7 +392,7 @@ canvas {
   height: 100%;
   position: absolute;
   bottom: -87.5%;
-  z-index: 10000000000000000;
+  z-index: 1000000;
 }
 
 a-hole {
@@ -1038,4 +1013,113 @@ font-family: Arial;
   backdrop-filter: blur(10px) ;
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
+}
+
+.grid-container {
+  --grid: 10rem;
+  width: 100%;
+  height: 100vh;
+  
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  perspective: 100rem;
+  -webkit-animation: rotate 100s linear infinite forwards;
+          animation: rotate 100s linear infinite forwards;
+}
+.grid-container .plane {
+  --dir: 1;
+  width: 300%;
+  height: 150%;
+  min-height: 70rem;
+  position: absolute;
+  bottom: 0;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotateX(85deg);
+}
+.grid-container .plane:last-child {
+  --dir: -1;
+  top: 0;
+  transform-origin: top center;
+  transform: translateX(-50%) rotateX(-85deg);
+}
+.grid-container .plane:last-child > *::after {
+  background-image: linear-gradient(to top, #111 var(--grid), rgba(0, 0, 0, 0));
+}
+.grid-container .plane > * {
+  transform-style: preserve-3d;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.grid-container .plane > *::before, .grid-container .plane > *::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.grid-container .plane > *::before {
+  background-image: repeating-linear-gradient(to left, rgb(55, 0, 156), rgb(101, 84, 255) 4px, transparent 4px, transparent var(--grid)), repeating-linear-gradient(to bottom, rgb(55, 0, 156), rgb(101, 84, 255) 4px, transparent 4px, transparent var(--grid));
+  -webkit-animation: move 1s linear infinite forwards;
+          animation: move 1s linear infinite forwards;
+}
+.grid-container .plane > *::after {
+  background-image: linear-gradient(to bottom, #111 var(--grid), rgba(0, 0, 0, 0));
+  z-index: 1;
+  transform: translateZ(1px);
+}
+.grid-container .plane .glow {
+  filter: blur(1rem);
+  z-index: 1;
+  mix-blend-mode: plus-lighter;
+}
+
+@-webkit-keyframes move {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(calc(var(--grid) * var(--dir)));
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(calc(var(--grid) * var(--dir)));
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    visibility: visible;
+  }
+  50% {
+    visibility: visible;
+  }
+  51% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes blink {
+  0% {
+    visibility: visible;
+  }
+  50% {
+    visibility: visible;
+  }
+  51% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
 }
