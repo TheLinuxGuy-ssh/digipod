@@ -669,7 +669,7 @@ a-hole canvas {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-
+font-family: Arial;
 	transform-style: preserve-3d;
 	perspective: 1200px;
 }
@@ -717,7 +717,7 @@ a-hole canvas {
 		}
 		.feature-card h2 {
 			font-size: 3.6em;
-			font-size: calc(3.6 * var(--fz));
+			font-size: calc(2.6 * var(--fz));
 			font-weight: 800;
 			line-height: 116%;
 			background: linear-gradient(0deg, #fff8 0%, #fffd 100%);
@@ -726,6 +726,7 @@ a-hole canvas {
 			-webkit-text-fill-color: transparent;
 			text-align: center;
 			margin: 0;
+      margin-bottom: 1rem;
 		}
 		.feature-card p {
 			font-size: 1.3em;
@@ -733,6 +734,7 @@ a-hole canvas {
 			font-weight: 600;
 			line-height: 142%;
 			color: #fff8;
+      margin: 0 0.75rem;
 			text-align: center;
     }
 			span {
