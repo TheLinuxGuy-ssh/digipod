@@ -505,6 +505,13 @@ a-hole canvas {
   height: 100%;
 }
 
+.showcase-img {
+  box-shadow: 0px 39px 56px 0px rgba(154, 137, 255, 0.75);
+-webkit-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.459);
+-moz-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.274);
+border-radius: 0.75rem;
+}
+
 .features .card {
   margin-left: -1rem;
   margin-right: -1rem;
