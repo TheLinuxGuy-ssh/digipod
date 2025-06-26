@@ -607,6 +607,9 @@ a-hole canvas {
    .showcase-screenshot {
     bottom: -55% !important;
    }
+   .showcase-img {
+  width: 90%;
+}
 }
 
 @media only screen and (max-width: 768px) {
@@ -626,6 +629,25 @@ a-hole canvas {
   }
   .content .btn {
     width: 20rem;
+  }
+  .extras-section {
+    padding: 5% 2% !important;
+  }
+  .features {
+    display: block !important;
+  }
+  .features .card {
+    margin: 1.2rem !important;
+  }
+  .feature-card {
+    --fz: calc(0.102 * var(--sz)) !important;
+  }
+  .feature-row {
+    display: block !important;
+    height: 100%;
+  }
+  .feature-card {
+    height: 25rem !important;
   }
 }
 
