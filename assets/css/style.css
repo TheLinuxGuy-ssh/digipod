@@ -170,7 +170,7 @@ canvas {
   color: white;
   font-family: monospace;
   font-size: 12px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(121,98,255, 0.5);
   padding: 5px 10px;
   border-radius: 3px;
   pointer-events: none;
@@ -219,7 +219,7 @@ canvas {
   right: 20px;
   color: white;
   font-size: 12px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(121,98,255, 0.5);
   padding: 4px 8px;
   border-radius: 4px;
   z-index: 100;
@@ -981,7 +981,7 @@ a-hole canvas {
 
 .footer .btn {
   padding: 1rem 2.5rem;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) ;
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
 }
