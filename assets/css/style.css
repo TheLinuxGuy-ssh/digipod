@@ -96,6 +96,7 @@ body::before {
   z-index: 20;
   padding: 20px;
   text-align: center;
+  margin-bottom: 100rem;
   color: var(--primary-color);
 }
 
@@ -421,7 +422,7 @@ canvas {
 
 a-hole {
   position: absolute;
-  top: 4em;
+  top: 0;
   left: 0;
   margin: 0;
   padding: 0;
@@ -481,7 +482,7 @@ a-hole .aura {
   border-radius: 0 0 100% 100%;
   filter: blur(50px);
   mix-blend-mode: plus-lighter;
-  opacity: 0.75;
+  opacity: 0.45;
   transform: translate3d(-50%, 0, 0);
   -webkit-animation: aura-glow 5s infinite linear;
           animation: aura-glow 5s infinite linear;
@@ -511,7 +512,7 @@ a-hole canvas {
   flex-wrap: wrap;
   align-items: stretch;
   margin-bottom: 2rem;
-  width: 380px;
+  width: 38rem;
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
@@ -610,6 +611,19 @@ a-hole canvas {
    .showcase-img {
   width: 90%;
 }
+.extras-section {
+    padding: 5% 1% !important;
+  }
+.feature-row.feature-master {
+  display: block !important;
+}
+.feature-card {
+    height: 25rem !important;
+    --fz: calc(0.052 * var(--sz)) !important;
+  }
+  .blocks.feature-card {
+    height: 35rem !important;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -646,9 +660,18 @@ a-hole canvas {
     display: block !important;
     height: 100%;
   }
-  .feature-card {
-    height: 25rem !important;
-  }
+}
+
+.header-row {
+  display: flex;
+}
+.header-col {
+  display: flex;
+  flex-direction: column;
+}
+.header-seperator {
+  border: 1px solid #ffffff3d;
+  margin: 2em;
 }
 
 .features {
