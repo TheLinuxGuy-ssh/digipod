@@ -393,14 +393,13 @@ filter: hue-rotate(55deg);
 }
 
 .showcase-screenshot {
-  margin-top: -10em;
     display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   position: absolute;
-  bottom: -87.5%;
+  bottom: -100%;
   z-index: 1000000;
 }
 
@@ -512,10 +511,11 @@ border-radius: 0.75rem;
   padding: 2.5rem 2rem;
   margin: 2rem;
     border: 1px solid #444444;
-    font-family: Boldonse;
+    font-family: Arial;
     backdrop-filter: blur(20px);
     text-align: center;
     font-weight: 100;
+
 }
 
 .features .header {
@@ -526,7 +526,7 @@ border-radius: 0.75rem;
 .features .title {
   font-size: 0.75rem;
   line-height: 2rem;
-  font-weight: 200;
+  font-weight: 500;
   color: #fff
 }
 
@@ -552,7 +552,7 @@ border-radius: 0.75rem;
 }
 
 .features .lists .list {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
   display: flex;
   margin-left: 0.5rem
 }
@@ -639,11 +639,9 @@ border-radius: 0.75rem;
   .extras-section {
     padding: 5% 2% !important;
   }
-  .features {
-    display: block !important;
-  }
   .features .card {
     margin: 1.2rem !important;
+    display: block;
   }
   .feature-card {
     --fz: calc(0.102 * var(--sz)) !important;
@@ -832,8 +830,8 @@ font-family: Arial;
 			--startX: calc(-0.6 * var(--sz));
 			--startY: 0;
 			--offset: 0s;
-			animation: orbX 24s cubic-bezier(0.11, 0, 0.5, 0) infinite,
-				orbY 24s cubic-bezier(0.64, 0, 0.92, 0) infinite;
+			animation: orbX 8s cubic-bezier(0.11, 0, 0.5, 0) infinite,
+				orbY 12s cubic-bezier(0.64, 0, 0.92, 0) infinite;
 			animation-delay: var(--offset);
   }
 			.feature-card:nth-child(2) {
