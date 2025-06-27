@@ -322,6 +322,7 @@ filter: hue-rotate(55deg);
 }
 .waitlist {
   width: 10em;
+  z-index: 1000000000000000000;
   margin: 0.3rem auto;
   margin-right: 0.3rem;
 }
