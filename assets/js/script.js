@@ -1071,7 +1071,7 @@ function setupAudio() {
   audioElement.preload = "auto";
 
   // Use the new audio URL
-  audioElement.src = "https://assets.codepen.io/7558/kosikk-slow-motion.ogg";
+  audioElement.src = "";
   audioElement.loop = true;
   audioElement.muted = true;
 }
