@@ -304,18 +304,20 @@ filter: hue-rotate(55deg);
 }
 
 .btn {
-  background-color: #bbbbbb25;
-  border: 1px solid #8b8b8b;
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
   border-radius: 1.2rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   transition: 0.2s;
+}
+.btn span {
+  color: #000 !important;
 }
 .nav-logo {
   margin: 0.3rem 0.5rem;
