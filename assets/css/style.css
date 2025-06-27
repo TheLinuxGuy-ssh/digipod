@@ -585,6 +585,12 @@ border-radius: 0.75rem;
 
 @media only screen and (max-width: 1024px) {
   
+  .lists {
+    text-align: left;
+  }
+  .lists svg {
+    margin-right: 2vw !important
+  }
   .navbar {
     width: 90%;
   }
