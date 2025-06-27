@@ -1,5 +1,7 @@
 import * as THREE from "https://esm.sh/three@0.175.0";
-import { GUI } from "https://esm.sh/dat.gui@0.7.9";
+import {
+  GUI
+} from "https://esm.sh/dat.gui@0.7.9";
 
 // Scene setup
 let scene, camera, renderer;
@@ -141,13 +143,13 @@ const colorPresets = {
   },
   Warm: {
     bgColorDown: [64, 34, 145],
-  bgColorUp: [0, 0, 0],
-  color1In: [76, 58, 201],
-  color1Out: [141, 151, 230],
-  color2In: [238, 238, 255],
-  color2Out: [50, 11, 255],
-  color3In: [127, 0, 255],
-  color3Out: [90, 90, 207],
+    bgColorUp: [0, 0, 0],
+    color1In: [76, 58, 201],
+    color1Out: [141, 151, 230],
+    color2In: [238, 238, 255],
+    color2Out: [50, 11, 255],
+    color3In: [127, 0, 255],
+    color3Out: [90, 90, 207],
   },
   Cool: {
     bgColorDown: [10, 20, 30],
@@ -694,7 +696,9 @@ function init() {
   camera.position.z = 1;
 
   // Create renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({
+    antialias: true
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
@@ -706,42 +710,102 @@ function init() {
       iResolution: {
         value: new THREE.Vector2(window.innerWidth, window.innerHeight)
       },
-      iTime: { value: 0 },
-      iMouse: { value: new THREE.Vector2(0.5, 0.5) },
-      lowFreq: { value: 0 },
-      midFreq: { value: 0 },
-      highFreq: { value: 0 },
-      isPlaying: { value: false },
-      transitionFactor: { value: 0 },
-      lineStraightness: { value: settings.lineStraightness },
-      idleAnimation: { value: 0 },
-      idleWaveHeight: { value: settings.idleWaveHeight },
+      iTime: {
+        value: 0
+      },
+      iMouse: {
+        value: new THREE.Vector2(0.5, 0.5)
+      },
+      lowFreq: {
+        value: 0
+      },
+      midFreq: {
+        value: 0
+      },
+      highFreq: {
+        value: 0
+      },
+      isPlaying: {
+        value: false
+      },
+      transitionFactor: {
+        value: 0
+      },
+      lineStraightness: {
+        value: settings.lineStraightness
+      },
+      idleAnimation: {
+        value: 0
+      },
+      idleWaveHeight: {
+        value: settings.idleWaveHeight
+      },
 
       // Enhanced kick/beat detection uniforms
-      kickEnergy: { value: 0 },
-      beatPhase: { value: 0 },
-      bounceEffect: { value: 0 },
+      kickEnergy: {
+        value: 0
+      },
+      beatPhase: {
+        value: 0
+      },
+      bounceEffect: {
+        value: 0
+      },
 
       // Settings uniforms
-      baseSpeed: { value: settings.baseSpeed },
-      idleSpeed: { value: settings.idleSpeed },
-      bassReactivity: { value: settings.bassReactivity },
-      midReactivity: { value: settings.midReactivity },
-      highReactivity: { value: settings.highReactivity },
-      kickReactivity: { value: settings.kickReactivity },
-      bounceIntensity: { value: settings.bounceIntensity },
-      waveIntensity: { value: settings.waveIntensity },
-      waveComplexity: { value: settings.waveComplexity },
-      rippleIntensity: { value: settings.rippleIntensity },
-      lineThickness: { value: settings.lineThickness },
+      baseSpeed: {
+        value: settings.baseSpeed
+      },
+      idleSpeed: {
+        value: settings.idleSpeed
+      },
+      bassReactivity: {
+        value: settings.bassReactivity
+      },
+      midReactivity: {
+        value: settings.midReactivity
+      },
+      highReactivity: {
+        value: settings.highReactivity
+      },
+      kickReactivity: {
+        value: settings.kickReactivity
+      },
+      bounceIntensity: {
+        value: settings.bounceIntensity
+      },
+      waveIntensity: {
+        value: settings.waveIntensity
+      },
+      waveComplexity: {
+        value: settings.waveComplexity
+      },
+      rippleIntensity: {
+        value: settings.rippleIntensity
+      },
+      lineThickness: {
+        value: settings.lineThickness
+      },
 
       // Grain uniforms
-      enableGrain: { value: settings.enableGrain },
-      grainIntensity: { value: settings.grainIntensity },
-      grainSpeed: { value: settings.grainSpeed },
-      grainMean: { value: settings.grainMean },
-      grainVariance: { value: settings.grainVariance },
-      grainBlendMode: { value: 0 }, // Default to Addition
+      enableGrain: {
+        value: settings.enableGrain
+      },
+      grainIntensity: {
+        value: settings.grainIntensity
+      },
+      grainSpeed: {
+        value: settings.grainSpeed
+      },
+      grainMean: {
+        value: settings.grainMean
+      },
+      grainVariance: {
+        value: settings.grainVariance
+      },
+      grainBlendMode: {
+        value: 0
+      }, // Default to Addition
 
       // Color uniforms
       bgColorDown: {
@@ -825,7 +889,9 @@ function init() {
 
 // Set up dat.gui
 function setupGUI() {
-  gui = new GUI({ width: 300 });
+  gui = new GUI({
+    width: 300
+  });
 
   // Create folders for organization
   const animationFolder = gui.addFolder("Animation");
@@ -1024,7 +1090,7 @@ function setupEventListeners() {
 
   // Handle play button
   document.getElementById("playButton").addEventListener("click", toggleAudio);
-  
+
 
   // Handle keyboard shortcuts
   window.addEventListener("keydown", (event) => {
@@ -1080,16 +1146,16 @@ function setupAudio() {
 function toggleAudio() {
   if (!playing) {
     // Initialize audio context if needed
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioContext.createAnalyser();
-      analyser.fftSize = 1024;
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
+    audioContext = new(window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 1024;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-      // Connect audio element to analyzer
-      audioSource = audioContext.createMediaElementSource(audioElement);
-      audioSource.connect(analyser);
-      analyser.connect(audioContext.destination);
-    
+    // Connect audio element to analyzer
+    audioSource = audioContext.createMediaElementSource(audioElement);
+    audioSource.connect(analyser);
+    analyser.connect(audioContext.destination);
+
 
     // Resume audio context (needed for newer browsers)
     audioSource.muted = true;
@@ -1124,15 +1190,38 @@ function updateFrequencies() {
   analyser.getByteFrequencyData(dataArray);
 
   // Divide spectrum into bands for better analysis
-  const bands = [
-    { name: "sub", range: [1, 4] }, // Sub-bass (20-40Hz)
-    { name: "kick", range: [4, 9] }, // Kick drum focus (~40-80Hz)
-    { name: "bass", range: [9, 20] }, // Bass range (80-160Hz)
-    { name: "lowMid", range: [20, 40] }, // Low-mids (160-320Hz)
-    { name: "mid", range: [40, 80] }, // Mids (320-640Hz)
-    { name: "highMid", range: [80, 160] }, // High-mids (640-1280Hz)
-    { name: "high", range: [160, 300] }, // Highs (1280-2400Hz)
-    { name: "veryHigh", range: [300, 500] } // Very high (2400Hz+)
+  const bands = [{
+      name: "sub",
+      range: [1, 4]
+    }, // Sub-bass (20-40Hz)
+    {
+      name: "kick",
+      range: [4, 9]
+    }, // Kick drum focus (~40-80Hz)
+    {
+      name: "bass",
+      range: [9, 20]
+    }, // Bass range (80-160Hz)
+    {
+      name: "lowMid",
+      range: [20, 40]
+    }, // Low-mids (160-320Hz)
+    {
+      name: "mid",
+      range: [40, 80]
+    }, // Mids (320-640Hz)
+    {
+      name: "highMid",
+      range: [80, 160]
+    }, // High-mids (640-1280Hz)
+    {
+      name: "high",
+      range: [160, 300]
+    }, // Highs (1280-2400Hz)
+    {
+      name: "veryHigh",
+      range: [300, 500]
+    } // Very high (2400Hz+)
   ];
 
   // Process each band
