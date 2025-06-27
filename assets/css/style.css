@@ -170,6 +170,7 @@ canvas {
 }
 
 .features-vid {
+  position: absolute;
 width: 100%;
 height: 100%;
 opacity: 0.5;
@@ -367,14 +368,12 @@ filter: hue-rotate(55deg);
   }
 
   .section-resource {
-  padding: 4em;
   justify-content: center;
   align-items: center;
   height: 100vh;
   z-index: -1;
   display: flex;
   overflow: hidden;
-  position: relative;
 }
 
 .osmo-icon__link {
@@ -399,7 +398,6 @@ filter: hue-rotate(55deg);
   width: 100%;
   height: 100%;
   position: absolute;
-  bottom: -100%;
   z-index: 1000000;
 }
 
@@ -492,6 +490,7 @@ a-hole canvas {
   box-shadow: 0px 39px 56px 0px rgba(154, 137, 255, 0.75);
 -webkit-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.459);
 -moz-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.274);
+position: absolute;
 border-radius: 0.75rem;
 }
 
@@ -503,7 +502,7 @@ border-radius: 0.75rem;
   align-items: stretch;
   margin-bottom: 2rem;
   width: 38rem;
-  position: absolute;
+
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
@@ -597,15 +596,15 @@ border-radius: 0.75rem;
   /* .showcase-screenshot {
     margin-top: -10vw !important;
   } */
-   .showcase-screenshot {
-    bottom: -55% !important;
-   }
    .showcase-img {
-  width: 90%;
+  width: 90% !important;
 }
 .extras-section {
     padding: 5% 1% !important;
-  }
+  background-image: none !important;
+  background-size: cover;
+  background-position: center center;
+}
 .feature-row.feature-master {
   display: block !important;
 }
@@ -615,6 +614,9 @@ border-radius: 0.75rem;
   }
   .blocks.feature-card {
     height: 35rem !important;
+  }
+  .footer-background {
+    background-image: url(../footer-mobile.png) !important;
   }
 }
 
@@ -641,7 +643,7 @@ border-radius: 0.75rem;
   }
   .features .card {
     margin: 1.2rem !important;
-    display: block;
+    
   }
   .feature-card {
     --fz: calc(0.102 * var(--sz)) !important;
@@ -650,6 +652,10 @@ border-radius: 0.75rem;
     display: block !important;
     height: 100%;
   }
+  .header-row {
+  display: block !important;
+
+}
 }
 
 .header-row {
@@ -675,7 +681,7 @@ border-radius: 0.75rem;
   padding: 5% 10%;
   background-image: url(../feature.png);
   background-size: cover;
-  background-position: center;
+  background-position: center center;
 }
 
 .feature-row {
