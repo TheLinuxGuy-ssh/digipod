@@ -304,8 +304,8 @@ filter: hue-rotate(55deg);
 }
 
 .btn {
-  background-color: #86868625;
-  border: 1px solid #444444;
+  background-color: #bbbbbb25;
+  border: 1px solid #8b8b8b;
   border-radius: 1.2rem;
   text-align: center;
   display: flex;
