@@ -1079,6 +1079,162 @@ span {
     opacity: 0;
   }
 }
+.pricing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem 0;
+  flex-direction: column;
+}
+
+.pricing-title {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.6rem;
+}
+.pricing-title-main {
+  font-size: 2.5rem;
+  font-family: "Boldonse";
+}
+.pricing-title .highlight {
+  text-decoration: none;
+}
+    .card-container {
+        position: relative;
+        width: 360px;
+        max-width: 90%;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    .card-pricing {
+        background-color: rgba(48, 20, 100, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 28px;
+        padding: 24px;
+        color: #E5E7EB;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.55), 0 0 0 1px rgba(167, 120, 255, 0.2) inset;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .card-title {
+        font-size: 1.775rem;
+        font-weight: 700;
+        color: #F9FAFB;
+        margin-bottom: 8px;
+        transform: translateZ(20px);
+    }
+    .card-price {
+        font-size: 3.25rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        margin-bottom: 6px;
+        transform: translateZ(20px);
+    }
+    .card-price .currency {
+        font-size: 1.875rem;
+        font-weight: 500;
+        vertical-align: super;
+        margin-right: 4px;
+        color: #9274fd;
+    }
+    .card-price .period {
+        font-size: 1.875rem;
+        font-weight: 500;
+        text-decoration: line-through;
+        color: #D1D5DB;
+    }
+    .card-description {
+        font-size: 1.125rem;
+        color: #B0B6BF;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        transform: translateZ(20px);
+    }
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 24px;
+        transform: translateZ(20px);
+    }
+    .features-list li {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        color: #D1D5DB;
+    }
+
+    .rotating-disc-svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        animation: spin 3s linear infinite;
+    }
+    .rotating-disc-svg circle {
+        stroke: #9d74fd;
+        stroke-width: 2;
+        stroke-dasharray: 10 5;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .cta-button {
+        background-color: rgba(133, 80, 255, 0.25);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 14px 0;
+        width: 100%;
+        border: 1px solid rgba(149, 120, 255, 0.3);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(143, 45, 255, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transform: translateZ(20px);
+    }
+    .cta-button:hover {
+        background-color: rgba(153, 90, 255, 0.4);
+        border-color: rgba(184, 140, 255, 0.4);
+        transform: translateY(-2px) scale(1.02) translateZ(20px);
+        box-shadow: 0 7px 20px rgba(119, 0, 255, 0.35);
+    }
+    .cta-button:active {
+        transform: translateY(-1px) scale(0.98) translateZ(20px);
+        background-color: rgba(141, 70, 255, 0.45);
+    }
+    .highlight {
+      text-decoration: underline;
+      color: #5a1efe;
+      text-shadow: 0px 0px 15px rgba(176, 162, 255, 0.507);
+    }
+
+    #energy-canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        pointer-events: none;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .footer {
   height: 100vh;
