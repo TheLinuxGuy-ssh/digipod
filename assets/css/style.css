@@ -522,8 +522,6 @@ a-hole canvas {
 }
 
 .features .card {
-  margin-left: -1rem;
-  margin-right: -1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -535,13 +533,35 @@ a-hole canvas {
   border-radius: 1.5rem;
   background-color: rgba(48, 48, 48, 0.205);
   padding: 2.5rem 2rem;
-  margin: 2rem;
+  margin: 0 0.5rem;
   border: 1px solid #444444;
   font-family: Arial;
   backdrop-filter: blur(20px);
-  text-align: center;
   font-weight: 100;
 
+}
+
+.feature-content {
+  text-align: left;
+}
+
+.card-img {
+  height: 100%;
+}
+.card-img img {
+  height: 100%;
+  border-radius: 1rem;
+}
+
+.features .card.card-before {
+  background-color: rgba(104, 0, 0, 0.418);
+  border: 1px solid #ff5050;
+  box-shadow: 0 0 20px 5px #ff505083;
+}
+.features .card.card-after {
+  background-color: rgba(14, 85, 0, 0.589);
+  border: 1px solid #5fff50;
+  box-shadow: 0 0 20px 5px #56ff5083;
 }
 
 .features .header {
@@ -580,7 +600,8 @@ a-hole canvas {
 .features .lists .list {
   margin-bottom: 1.25rem;
   display: flex;
-  margin-left: 0.5rem
+  margin-left: 0.5rem;
+  text-align: left;
 }
 
 .features .lists .list svg {
@@ -731,15 +752,12 @@ a-hole canvas {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-
+  gap: 1rem;
+  margin: 5rem 15vw;
 }
 
 .extras-section {
   padding: 5% 10%;
-  background-image: url(../feature.png);
-  background-size: cover;
-  background-position: center center;
 }
 
 .feature-row {
@@ -767,7 +785,7 @@ a-hole canvas {
   --xv: 0;
   --yv: 0;
   width: 100%;
-  height: calc(1.05 * var(--sz));
+  height: calc(1.35 * var(--sz));
   max-width: calc(100vw - 24px);
   overflow: hidden;
   display: flex;
@@ -783,11 +801,13 @@ a-hole canvas {
   width: 86%;
   height: 86%;
   border: 1px solid #58519baa;
+  box-shadow: 0 0 20px 5px #58519baa;
   border-radius: 22px;
   overflow: hidden;
+  display: flex;
   transition: all 0.4s ease-out;
   transform: rotateX(calc(1deg * var(--xv))) rotateY(calc(1deg * var(--yv)));
-
+  padding: 1rem;
 }
 
 .feature-card .tilt::before {
@@ -807,12 +827,11 @@ a-hole canvas {
   display: block;
   width: fit-content;
   border: 1px solid #fff3;
-  border-radius: 4px;
+  border-radius: 1rem;
   color: #fff;
   font-size: 0.8em;
   font-size: calc(2 * var(--fz));
-  margin: 0 auto 22px auto;
-  padding: 4px 8px;
+  padding: 6px 10px;
 }
 
 .feature-card h2 {
@@ -824,9 +843,27 @@ a-hole canvas {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-align: center;
   margin: 0;
+  margin: 0 0.75rem;
   margin-bottom: 1rem;
+  
+}
+
+.feature-card:nth-child(odd) .card-img {
+  margin-left: 1.5rem;
+}
+
+.feature-card:nth-child(odd) .tag {
+  margin: 0 0  2rem 0rem;
+  
+}
+.feature-card:nth-child(even) .tag {
+  margin: 0 0  2rem 0rem;
+  margin-left: auto;
+}
+
+.feature-card:nth-child(even) h2 {
+  text-align: right;
 }
 
 .feature-card p {
@@ -836,7 +873,6 @@ a-hole canvas {
   line-height: 142%;
   color: #fff8;
   margin: 0 0.75rem;
-  text-align: center;
 }
 
 span {
@@ -939,16 +975,7 @@ span {
   --offset: 20s;
 }
 
-.feature-card img {
-  width: 64%;
-  height: auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
+
 
 .feature-card .dot {
   position: absolute;
@@ -1052,6 +1079,162 @@ span {
     opacity: 0;
   }
 }
+.pricing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem 0;
+  flex-direction: column;
+}
+
+.pricing-title {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.6rem;
+}
+.pricing-title-main {
+  font-size: 2.5rem;
+  font-family: "Boldonse";
+}
+.pricing-title .highlight {
+  text-decoration: none;
+}
+    .card-container {
+        position: relative;
+        width: 360px;
+        max-width: 90%;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    .card-pricing {
+        background-color: rgba(48, 20, 100, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 28px;
+        padding: 24px;
+        color: #E5E7EB;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.55), 0 0 0 1px rgba(167, 120, 255, 0.2) inset;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .card-title {
+        font-size: 1.775rem;
+        font-weight: 700;
+        color: #F9FAFB;
+        margin-bottom: 8px;
+        transform: translateZ(20px);
+    }
+    .card-price {
+        font-size: 3.25rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        margin-bottom: 6px;
+        transform: translateZ(20px);
+    }
+    .card-price .currency {
+        font-size: 1.875rem;
+        font-weight: 500;
+        vertical-align: super;
+        margin-right: 4px;
+        color: #9274fd;
+    }
+    .card-price .period {
+        font-size: 1.875rem;
+        font-weight: 500;
+        text-decoration: line-through;
+        color: #D1D5DB;
+    }
+    .card-description {
+        font-size: 1.125rem;
+        color: #B0B6BF;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        transform: translateZ(20px);
+    }
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 24px;
+        transform: translateZ(20px);
+    }
+    .features-list li {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        color: #D1D5DB;
+    }
+
+    .rotating-disc-svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        animation: spin 3s linear infinite;
+    }
+    .rotating-disc-svg circle {
+        stroke: #9d74fd;
+        stroke-width: 2;
+        stroke-dasharray: 10 5;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .cta-button {
+        background-color: rgba(133, 80, 255, 0.25);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 14px 0;
+        width: 100%;
+        border: 1px solid rgba(149, 120, 255, 0.3);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(143, 45, 255, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transform: translateZ(20px);
+    }
+    .cta-button:hover {
+        background-color: rgba(153, 90, 255, 0.4);
+        border-color: rgba(184, 140, 255, 0.4);
+        transform: translateY(-2px) scale(1.02) translateZ(20px);
+        box-shadow: 0 7px 20px rgba(119, 0, 255, 0.35);
+    }
+    .cta-button:active {
+        transform: translateY(-1px) scale(0.98) translateZ(20px);
+        background-color: rgba(141, 70, 255, 0.45);
+    }
+    .highlight {
+      text-decoration: underline;
+      color: #5a1efe;
+      text-shadow: 0px 0px 15px rgba(176, 162, 255, 0.507);
+    }
+
+    #energy-canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        pointer-events: none;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .footer {
   height: 100vh;

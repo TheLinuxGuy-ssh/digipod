@@ -3,6 +3,13 @@ import {
   GUI
 } from "https://esm.sh/dat.gui@0.7.9";
 
+(function () {
+        var scroll = new LocomotiveScroll({
+    el: document.querySelector('#master'),
+    smooth: true
+});
+    })();
+
 // Scene setup
 let scene, camera, renderer;
 let shaderMaterial;
