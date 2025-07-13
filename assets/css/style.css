@@ -384,6 +384,17 @@ canvas {
   pointer-events: none;
   z-index: -1;
 }
+.c-lerp-block_title {
+    display: inline-block;
+    font-size: 0;
+    line-height: 1.1;
+    margin-left: 1.25rem;
+    vertical-align: middle;
+}
+.c-lerp-block_title span {
+    display: inline-block;
+    min-width: .3em;
+}
 
 .section-resource {
   justify-content: center;
