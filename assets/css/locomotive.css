@@ -31,6 +31,7 @@ html.has-scroll-dragging {
   top: 0;
   width: 11px;
   height: 100%;
+  z-index: 1000000000000000000000000000000000000000000;
   transform-origin: center right;
   transition: transform 0.3s, opacity 0.3s;
   opacity: 0; }
@@ -51,7 +52,7 @@ html.has-scroll-dragging {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: black;
+  background-color: white;
   opacity: 0.5;
   width: 7px;
   border-radius: 10px;
