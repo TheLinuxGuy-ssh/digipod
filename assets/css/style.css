@@ -525,9 +525,9 @@ a-hole canvas {
 }
 
 .showcase-img {
-  box-shadow: 0px 39px 56px 0px rgba(154, 137, 255, 0.75);
-  -webkit-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.459);
-  -moz-box-shadow: 0px 39px 56px 0px rgba(155, 137, 255, 0.274);
+  box-shadow: 0px 39px 156px 0px rgba(154, 137, 255, 0.75);
+  -webkit-box-shadow: 0px 39px 166px 0px rgba(155, 137, 255, 0.459);
+  -moz-box-shadow: 0px 39px 166px 0px rgba(155, 137, 255, 0.274);
   position: absolute;
   border-radius: 0.75rem;
 }
@@ -798,7 +798,7 @@ a-hole canvas {
   width: 100%;
   height: calc(1.35 * var(--sz));
   max-width: calc(100vw - 24px);
-  overflow: hidden;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -812,7 +812,7 @@ a-hole canvas {
   width: 86%;
   height: 86%;
   border: 1px solid #58519baa;
-  box-shadow: 0 0 20px 5px #58519baa;
+  box-shadow: 0 0 90px -5px #58519baa;
   border-radius: 22px;
   overflow: hidden;
   display: flex;
@@ -840,9 +840,10 @@ a-hole canvas {
   border: 1px solid #fff3;
   border-radius: 1rem;
   color: #fff;
-  font-size: 0.8em;
+  font-size: 0.8em !important;
   font-size: calc(2 * var(--fz));
   padding: 6px 10px;
+  font-family: "Boldonse";
 }
 
 .feature-card h2 {
