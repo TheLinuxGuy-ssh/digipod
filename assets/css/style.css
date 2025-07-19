@@ -176,9 +176,7 @@ canvas {
   margin: 0 !important;
   padding: 0 !important;
   z-index: 2;
-  /* Above content but below noise */
   pointer-events: none;
-  /* Allow clicking through to content */
 }
 
 .features-vid {
@@ -204,10 +202,8 @@ canvas {
   z-index: 10;
 }
 
-/* Controls panel */
 .dg.ac {
   z-index: 101 !important;
-  /* Make sure GUI is on top of noise */
 }
 
 #container {
@@ -671,9 +667,6 @@ a-hole canvas {
     font-size: 3.5vw !important;
   }
 
-  /* .showcase-screenshot {
-    margin-top: -10vw !important;
-  } */
   .showcase-img {
     width: 90% !important;
   }
