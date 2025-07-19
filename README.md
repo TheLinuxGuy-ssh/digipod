@@ -2,4 +2,8 @@
 
 # digipod
 
-An online experience of macOS at the cost of nothing but Internet packets
+This is the landing page of the upcoming Saas product <a href="https://https://app.digipod.tech/signin)">Digipod.AI</a>
+
+## Technologies 
+
+The project is made by the use of Three.JS combined with HTML, CSS3 and Javascript.
