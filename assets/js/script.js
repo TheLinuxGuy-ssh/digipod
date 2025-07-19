@@ -10,7 +10,6 @@ import {
 });
     })();
 
-// Scene setup
 let scene, camera, renderer;
 let shaderMaterial;
 let time = 0;
@@ -19,7 +18,6 @@ let lastTime = performance.now();
 let fpsElement;
 let gui;
 
-// Audio variables
 let audioContext, analyser, dataArray;
 let audioElement;
 let lowFreq = 0,
@@ -29,75 +27,55 @@ let prevLowFreq = 0;
 let playing = false;
 let audioSource;
 
-// Multi-band kick detection for better accuracy
 let kickDetected = false;
 let kickEnergy = 0;
 let kickDecay = 0.8;
-let kickThreshold = 0.05; // Lower threshold to catch more kicks
+let kickThreshold = 0.05;
 let kickSensitivity = 2.0;
 let kickImpactDuration = 0;
 let energyHistory = [];
-const historyLength = 4; // Shorter history for faster response
+const historyLength = 4;
 
-// Create frequency band energy arrays for multi-band detection
 let bandEnergies = Array(8).fill(0);
 let bandHistories = Array(8)
   .fill()
   .map(() => []);
 
-// Beat tracking variables
 let beatTime = 0;
 let lastKickTime = 0;
 let beatInterval = 0;
 let beatPhase = 0;
 
-// Transition variables for smooth animation
-let transitionFactor = 0; // 0 = not playing, 1 = playing
-const transitionSpeed = 0.03; // Slower transition for more smoothness
-let idleAnimation = 0; // Animation value when idle
+let transitionFactor = 0;
+const transitionSpeed = 0.03;
+let idleAnimation = 0;
 
-// Mouse position
 const mouse = {
   x: 0.5,
   y: 0.5
 };
 
-// Settings for dat.gui
 const settings = {
-  // Animation settings
   baseSpeed: 1.0,
   idleSpeed: 0.1,
 
-  // Audio reactivity
-  bassReactivity: 0.4, // More moderate
+  bassReactivity: 0.4,
   midReactivity: 0.5,
   highReactivity: 0.4,
 
-  // Kick settings - more subtle defaults
-  kickReactivity: 0.6, // Reduced from 1.0
-  bounceIntensity: 0.15, // More subtle bounce
+  kickReactivity: 0.6,
+  bounceIntensity: 0.15,
   waveIntensity: 0.08,
   waveComplexity: 2.2,
-  rippleIntensity: 0.25, // Reduced from 0.5
+  rippleIntensity: 0.25,
 
-  // Visual settings
   lineThickness: 1.8,
   lineStraightness: 2.53,
 
-  // Transition settings
-  idleWaveHeight: 0.01, // Small waves when idle
-  transitionSmoothness: 0.03, // How smooth the transition is
+  idleWaveHeight: 0.01,
+  transitionSmoothness: 0.03,
 
-  // Color settings
   colorPreset: "Warm",
-  // bgColorDown: [40, 20, 10],
-  // bgColorUp: [20, 10, 5],
-  // color1In: [255, 200, 0],
-  // color1Out: [255, 100, 0],
-  // color2In: [255, 100, 100],
-  // color2Out: [200, 50, 50],
-  // color3In: [255, 150, 50],
-  // color3Out: [200, 100, 0],
   bgColorDown: [64, 34, 145],
   bgColorUp: [0, 0, 0],
   color1In: [76, 58, 201],
@@ -106,27 +84,19 @@ const settings = {
   color2Out: [50, 11, 255],
   color3In: [127, 0, 255],
   color3Out: [90, 90, 207],
-
-
-  // Grain settings
   enableGrain: true,
   grainIntensity: 0.075,
   grainSpeed: 2.0,
   grainMean: 0.0,
   grainVariance: 0.5,
   grainBlendMode: "Addition",
-
-  // Advanced settings
   showGui: true,
   showDebug: false,
-
-  // Reset to defaults
   resetColors: () => {
     applyColorPreset(settings.colorPreset);
   }
 };
 
-// Color presets
 const colorPresets = {
   Default: {
     bgColorDown: [51, 25, 25],
@@ -141,12 +111,12 @@ const colorPresets = {
   Neon: {
     bgColorDown: [10, 10, 20],
     bgColorUp: [5, 5, 15],
-    color1In: [255, 0, 255], // Magenta
-    color1Out: [128, 0, 255], // Purple
-    color2In: [0, 255, 255], // Cyan
-    color2Out: [0, 128, 255], // Blue
-    color3In: [255, 255, 0], // Yellow
-    color3Out: [255, 128, 0] // Orange
+    color1In: [255, 0, 255],
+    color1Out: [128, 0, 255],
+    color2In: [0, 255, 255],
+    color2Out: [0, 128, 255],
+    color3In: [255, 255, 0],
+    color3Out: [255, 128, 0]
   },
   Warm: {
     bgColorDown: [64, 34, 145],
@@ -161,41 +131,39 @@ const colorPresets = {
   Cool: {
     bgColorDown: [10, 20, 30],
     bgColorUp: [5, 10, 20],
-    color1In: [100, 200, 255], // Light Blue
-    color1Out: [0, 100, 200], // Dark Blue
-    color2In: [100, 255, 200], // Mint
-    color2Out: [0, 150, 100], // Green
-    color3In: [150, 200, 255], // Sky Blue
-    color3Out: [50, 100, 200] // Royal Blue
+    color1In: [100, 200, 255],
+    color1Out: [0, 100, 200],
+    color2In: [100, 255, 200],
+    color2Out: [0, 150, 100],
+    color3In: [150, 200, 255],
+    color3Out: [50, 100, 200]
   },
   Monochrome: {
     bgColorDown: [10, 10, 10],
     bgColorUp: [20, 20, 20],
-    color1In: [200, 200, 200], // Light Gray
-    color1Out: [150, 150, 150], // Mid Gray
-    color2In: [255, 255, 255], // White
-    color2Out: [100, 100, 100], // Dark Gray
-    color3In: [180, 180, 180], // Silver
-    color3Out: [120, 120, 120] // Gray
+    color1In: [200, 200, 200],
+    color1Out: [150, 150, 150],
+    color2In: [255, 255, 255],
+    color2Out: [100, 100, 100],
+    color3In: [180, 180, 180],
+    color3Out: [120, 120, 120]
   },
   Cyberpunk: {
     bgColorDown: [20, 0, 40],
     bgColorUp: [0, 20, 40],
-    color1In: [255, 0, 128], // Hot Pink
-    color1Out: [200, 0, 100], // Dark Pink
-    color2In: [0, 255, 128], // Neon Green
-    color2Out: [0, 200, 100], // Dark Green
-    color3In: [255, 255, 0], // Neon Yellow
-    color3Out: [200, 200, 0] // Dark Yellow
+    color1In: [255, 0, 128],
+    color1Out: [200, 0, 100],
+    color2In: [0, 255, 128],
+    color2Out: [0, 200, 100],
+    color3In: [255, 255, 0],
+    color3Out: [200, 200, 0]
   }
 };
 
-// Apply color preset
 function applyColorPreset(presetName) {
   if (colorPresets[presetName]) {
     const preset = colorPresets[presetName];
 
-    // Copy preset values to settings
     settings.bgColorDown = [...preset.bgColorDown];
     settings.bgColorUp = [...preset.bgColorUp];
     settings.color1In = [...preset.color1In];
@@ -205,10 +173,8 @@ function applyColorPreset(presetName) {
     settings.color3In = [...preset.color3In];
     settings.color3Out = [...preset.color3Out];
 
-    // Update shader uniforms with new colors
     updateShaderColors();
 
-    // Update GUI controllers if GUI exists
     if (gui && gui.__controllers) {
       for (let i = 0; i < gui.__controllers.length; i++) {
         const controller = gui.__controllers[i];
@@ -229,7 +195,6 @@ function applyColorPreset(presetName) {
   }
 }
 
-// Update shader colors
 function updateShaderColors() {
   if (!shaderMaterial) return;
 
@@ -282,16 +247,12 @@ function updateShaderColors() {
   );
 }
 
-// Custom cursor implementation with throttling for better performance
 const cursor = document.querySelector(".custom-cursor");
 let lastCursorUpdate = 0;
 
 document.addEventListener("mousemove", (e) => {
-  // Update mouse position for shader
   mouse.x = e.clientX / window.innerWidth;
   mouse.y = e.clientY / window.innerHeight;
-
-  // Throttle cursor updates to every 16ms (approx 60fps)
   const now = performance.now();
   if (now - lastCursorUpdate > 16) {
     cursor.style.left = `${e.clientX}px`;
@@ -300,7 +261,6 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-// Vertex shader source
 const vertexShaderSource = `
 varying vec2 vUv;
 
@@ -310,7 +270,6 @@ void main() {
 }
 `;
 
-// Fragment shader source with enhanced transitions and more subtle effects
 const fragmentShaderSource = `
 precision highp float;
 
@@ -641,7 +600,6 @@ void main() {
 }
 `;
 
-// Function to create debug display
 function createDebugDisplay() {
   if (document.getElementById("debugDisplay")) return;
 
@@ -662,7 +620,6 @@ function createDebugDisplay() {
   document.body.appendChild(debugDiv);
 }
 
-// Function to update debug display
 function updateDebugDisplay() {
   const debugDiv = document.getElementById("debugDisplay");
   if (!debugDiv) return;
@@ -686,30 +643,23 @@ function updateDebugDisplay() {
   `;
 }
 
-// Initialize Three.js scene
 function init() {
-  // Get DOM elements
   const container = document.getElementById("container");
   fpsElement = document.getElementById("fps");
 
-  // Create debug display
   createDebugDisplay();
 
-  // Create scene
   scene = new THREE.Scene();
 
-  // Create camera
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   camera.position.z = 1;
 
-  // Create renderer
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  // Create shader material
   shaderMaterial = new THREE.ShaderMaterial({
     vertexShader: vertexShaderSource,
     fragmentShader: fragmentShaderSource,
@@ -748,7 +698,6 @@ function init() {
         value: settings.idleWaveHeight
       },
 
-      // Enhanced kick/beat detection uniforms
       kickEnergy: {
         value: 0
       },
@@ -759,7 +708,6 @@ function init() {
         value: 0
       },
 
-      // Settings uniforms
       baseSpeed: {
         value: settings.baseSpeed
       },
@@ -794,7 +742,6 @@ function init() {
         value: settings.lineThickness
       },
 
-      // Grain uniforms
       enableGrain: {
         value: settings.enableGrain
       },
@@ -812,9 +759,8 @@ function init() {
       },
       grainBlendMode: {
         value: 0
-      }, // Default to Addition
+      },
 
-      // Color uniforms
       bgColorDown: {
         value: new THREE.Vector3(
           settings.bgColorDown[0] / 255,
@@ -874,43 +820,30 @@ function init() {
     }
   });
 
-  // Create a plane geometry that fills the screen
   const geometry = new THREE.PlaneGeometry(2, 2);
 
-  // Create mesh with shader material
   const mesh = new THREE.Mesh(geometry, shaderMaterial);
   scene.add(mesh);
-
-  // Set up dat.gui
   setupGUI();
-
-  // Set up event listeners
   setupEventListeners();
-
-  // Set up audio
   setupAudio();
   toggleAudio();
-  // Start animation loop
   animate();
 }
 
-// Set up dat.gui
 function setupGUI() {
   gui = new GUI({
     width: 300
   });
 
-  // Create folders for organization
   const animationFolder = gui.addFolder("Animation");
   const audioFolder = gui.addFolder("Audio Reactivity");
   const kickFolder = gui.addFolder("Kick/Beat Effects");
   const visualFolder = gui.addFolder("Visual Settings");
-  const transitionFolder = gui.addFolder("Transition Settings"); // New folder
+  const transitionFolder = gui.addFolder("Transition Settings");
   const colorFolder = gui.addFolder("Color Settings");
   const grainFolder = gui.addFolder("Film Grain");
   const advancedFolder = gui.addFolder("Advanced");
-
-  // Animation settings
   animationFolder.add(settings, "baseSpeed", 0.1, 3.0).onChange((value) => {
     shaderMaterial.uniforms.baseSpeed.value = value;
   });
@@ -918,8 +851,6 @@ function setupGUI() {
     shaderMaterial.uniforms.idleSpeed.value = value;
   });
   animationFolder.open();
-
-  // Audio reactivity settings
   audioFolder.add(settings, "bassReactivity", 0.0, 3.0).onChange((value) => {
     shaderMaterial.uniforms.bassReactivity.value = value;
   });
@@ -930,8 +861,6 @@ function setupGUI() {
     shaderMaterial.uniforms.highReactivity.value = value;
   });
   audioFolder.open();
-
-  // Kick/Beat effects settings
   kickFolder
     .add(settings, "kickReactivity", 0.0, 3.0)
     .name("Kick Reactivity")
@@ -951,8 +880,6 @@ function setupGUI() {
       shaderMaterial.uniforms.rippleIntensity.value = value;
     });
   kickFolder.open();
-
-  // Transition settings
   transitionFolder
     .add(settings, "idleWaveHeight", 0.0, 0.1)
     .name("Idle Wave Height")
@@ -963,8 +890,6 @@ function setupGUI() {
     .add(settings, "transitionSmoothness", 0.01, 0.1)
     .name("Transition Speed");
   transitionFolder.open();
-
-  // Visual settings
   visualFolder.add(settings, "waveIntensity", 0.01, 1.0).onChange((value) => {
     shaderMaterial.uniforms.waveIntensity.value = value;
   });
@@ -981,8 +906,6 @@ function setupGUI() {
       shaderMaterial.uniforms.lineStraightness.value = value;
     });
   visualFolder.open();
-
-  // Color settings
   colorFolder
     .add(settings, "colorPreset", Object.keys(colorPresets))
     .onChange(applyColorPreset);
@@ -1013,8 +936,6 @@ function setupGUI() {
     .name("High Line Out")
     .onChange(updateShaderColors);
   colorFolder.add(settings, "resetColors");
-
-  // Grain settings
   grainFolder.add(settings, "enableGrain").onChange((value) => {
     shaderMaterial.uniforms.enableGrain.value = value;
   });
@@ -1059,8 +980,6 @@ function setupGUI() {
       }
       shaderMaterial.uniforms.grainBlendMode.value = modeValue;
     });
-
-  // Advanced settings
   advancedFolder.add(settings, "showGui").onChange((value) => {
     if (value) {
       gui.domElement.style.display = "block";
@@ -1074,14 +993,10 @@ function setupGUI() {
     .onChange((value) => {
       updateDebugDisplay();
     });
-
-  // Set initial state
-  gui.close(); // Start with GUI closed
+  gui.close();
 }
 
-// Set up event listeners
 function setupEventListeners() {
-  // Handle window resize
   window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     shaderMaterial.uniforms.iResolution.value.set(
@@ -1089,30 +1004,18 @@ function setupEventListeners() {
       window.innerHeight
     );
   });
-
-  // Handle mouse movement for shader
   window.addEventListener("mousemove", (event) => {
     shaderMaterial.uniforms.iMouse.value.set(event.clientX, event.clientY);
   });
-
-  // Handle play button
   document.getElementById("playButton").addEventListener("click", toggleAudio);
-
-
-  // Handle keyboard shortcuts
   window.addEventListener("keydown", (event) => {
-    // Space bar to toggle play/pause
     if (event.code === "Space") {
       toggleAudio();
       event.preventDefault();
     }
-
-    // 'G' key to toggle GUI
     if (event.code === "KeyG") {
       settings.showGui = !settings.showGui;
       gui.domElement.style.display = settings.showGui ? "block" : "none";
-
-      // Update the controller
       for (let i = 0; i < gui.__controllers.length; i++) {
         const controller = gui.__controllers[i];
         if (controller.property === "showGui") {
@@ -1120,13 +1023,9 @@ function setupEventListeners() {
         }
       }
     }
-
-    // 'D' key to toggle debug info
     if (event.code === "KeyD") {
       settings.showDebug = !settings.showDebug;
       updateDebugDisplay();
-
-      // Update the controller
       for (let i = 0; i < gui.__controllers.length; i++) {
         const controller = gui.__controllers[i];
         if (controller.property === "showDebug") {
@@ -1136,38 +1035,25 @@ function setupEventListeners() {
     }
   });
 }
-
-// Set up audio
 function setupAudio() {
   audioElement = new Audio();
   audioElement.crossOrigin = "anonymous";
   audioElement.preload = "auto";
-
-  // Use the new audio URL
   audioElement.src = "";
   audioElement.loop = true;
   audioElement.muted = true;
 }
-
-// Toggle audio playback
 function toggleAudio() {
   if (!playing) {
-    // Initialize audio context if needed
     audioContext = new(window.AudioContext || window.webkitAudioContext)();
     analyser = audioContext.createAnalyser();
     analyser.fftSize = 1024;
     dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-    // Connect audio element to analyzer
     audioSource = audioContext.createMediaElementSource(audioElement);
     audioSource.connect(analyser);
     analyser.connect(audioContext.destination);
-
-
-    // Resume audio context (needed for newer browsers)
     audioSource.muted = true;
     audioContext.resume().then(() => {
-      // Play the track
       audioElement.play().catch((e) => {
         console.error("Error playing audio:", e);
       });
@@ -1176,117 +1062,88 @@ function toggleAudio() {
     document.getElementById("playButton").textContent = "STOP";
     playing = true;
     shaderMaterial.uniforms.isPlaying.value = true;
-
-    // Reset beat tracking
     beatTime = 0;
     lastKickTime = 0;
     beatInterval = 0;
   } else {
-    // Stop playback
     audioElement.pause();
     document.getElementById("playButton").textContent = "PLAY";
     playing = false;
     shaderMaterial.uniforms.isPlaying.value = false;
   }
 }
-
-// Improved multi-band frequency analysis with better kick detection
 function updateFrequencies() {
   if (!playing || !analyser) return;
 
   analyser.getByteFrequencyData(dataArray);
-
-  // Divide spectrum into bands for better analysis
   const bands = [{
       name: "sub",
       range: [1, 4]
-    }, // Sub-bass (20-40Hz)
+    },
     {
       name: "kick",
       range: [4, 9]
-    }, // Kick drum focus (~40-80Hz)
+    },
     {
       name: "bass",
       range: [9, 20]
-    }, // Bass range (80-160Hz)
+    },
     {
       name: "lowMid",
       range: [20, 40]
-    }, // Low-mids (160-320Hz)
+    },
     {
       name: "mid",
       range: [40, 80]
-    }, // Mids (320-640Hz)
+    },
     {
       name: "highMid",
       range: [80, 160]
-    }, // High-mids (640-1280Hz)
+    },
     {
       name: "high",
       range: [160, 300]
-    }, // Highs (1280-2400Hz)
+    },
     {
       name: "veryHigh",
       range: [300, 500]
-    } // Very high (2400Hz+)
+    }
   ];
-
-  // Process each band
   for (let i = 0; i < bands.length; i++) {
     const [start, end] = bands[i].range;
     const bandSlice = dataArray.slice(start, end);
     const bandAvg = getWeightedAverage(bandSlice);
-
-    // Store current band energy (0-1 range)
     bandEnergies[i] = bandAvg;
-
-    // Keep history for each band
     if (!bandHistories[i]) bandHistories[i] = [];
     bandHistories[i].unshift(bandAvg);
     if (bandHistories[i].length > historyLength) {
       bandHistories[i].pop();
     }
   }
-
-  // Focus on kick drum band (band index 1) and bass band (band index 2)
   const kickAvg = bandEnergies[1];
   const bassAvg = bandEnergies[2];
-
-  // Calculate recent history average for kick band
   const kickHistory = bandHistories[1];
   const recentKickAvg =
     kickHistory.slice(1).reduce((sum, val) => sum + val, 0) /
     (kickHistory.length - 1 || 1);
-
-  // Enhanced kick detection - detect sudden spikes in energy
-  // 1. Current energy must be significantly higher than recent average
-  // 2. Absolute energy must be above a minimum threshold
-  // 3. Must have been some time since last kick to avoid false positives
   const kickJump = kickAvg - recentKickAvg;
   const newKickDetected =
     kickJump > kickThreshold * 1.2 &&
     kickAvg > 0.15 &&
     (!kickDetected || performance.now() - lastKickTime > 150);
-
-  // Handle kick detection
   if (newKickDetected) {
-    // New kick detected
     kickDetected = true;
-    kickEnergy = Math.min(1.0, kickAvg * kickSensitivity); // Scale with sensitivity
-    kickImpactDuration = 10; // Set impact duration (frames)
-
-    // Track beat timing
+    kickEnergy = Math.min(1.0, kickAvg * kickSensitivity);
+    kickImpactDuration = 10;
     const now = performance.now();
     if (lastKickTime > 0) {
-      // Calculate beat interval from previous kick
       const newInterval = now - lastKickTime;
       if (newInterval > 200 && newInterval < 2000) {
-        // Reasonable beat range
-        beatInterval = beatInterval * 0.7 + newInterval * 0.3; // Smooth the intervals
+        beatInterval = beatInterval * 0.7 + newInterval * 0.3;
       }
     }
     lastKickTime = now;
-    beatTime = 0; // Reset beat phase
+    beatTime = 0;
 
     console.log(
       "KICK detected!",
@@ -1295,23 +1152,16 @@ function updateFrequencies() {
       kickJump.toFixed(2)
     );
   } else {
-    // Decay kick energy
     kickEnergy *= kickDecay;
-
-    // Reset detection when energy drops below threshold
     if (kickEnergy < 0.05) {
       kickDetected = false;
     }
-
-    // Count down impact duration
     if (kickImpactDuration > 0) {
       kickImpactDuration--;
     }
   }
-
-  // Calculate beat phase (0.0 to 1.0 representing position in beat cycle)
   if (beatInterval > 0) {
-    beatTime += 16.67; // Approximately 60fps (16.67ms per frame)
+    beatTime += 16.67;
     beatPhase = (beatTime % beatInterval) / beatInterval;
   }
 
